@@ -1,0 +1,222 @@
+{% assign total_blocks = section.blocks.size %}
+
+{% if template.name == 'index' %}
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'text_block' %}
+        {% render 'split-text', block: block, total_blocks: total_blocks %}
+      {% when 'image_block' %}
+        {% render 'split-image', block: block, total_blocks: total_blocks %}
+      {% when 'video_block' %}
+        {% render 'split-video', block: block, total_blocks: total_blocks %}
+    {% endcase %}
+  {% endfor %}
+{% endif %}
+
+<style>
+  .split-section__text {
+    flex: 0 0 {{ section.settings.left_block_width | append: '%' }};
+  }
+
+  .split-section__image {
+    flex: 0 0 {{ section.settings.right_block_width | append: '%' }};
+  }
+</style>
+
+{% stylesheet %}
+  .split-section {
+    display: flex;
+    flex-wrap: wrap;
+    background-image: url('{{ section.settings.background_desktop | image_url }}');
+    background-size: '{{ section.settings.background_size_desktop }}';
+    background-position: center;
+    background-repeat: no-repeat;
+    align-items: stretch;
+  }
+  .split-section__block {
+    flex: 1 1 50%;
+    padding: 2rem;
+  }
+
+  .split-section__block--full {
+    flex: 1 1 100%;
+  }
+  .split-section__block h2 {
+    margin-bottom: 1rem;
+  }
+  .split-section__block img {
+    max-width: 100%;
+    height: auto;
+  }
+  .btn {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+  }
+  .btn:hover {
+    background-color: #333;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Split Section",
+  "tag": "section",
+  "class": "split-section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "left_block_width",
+      "label": "Left Block Width (%)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "right_block_width",
+      "label": "Right Block Width (%)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 50
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text_block",
+      "name": "Text Block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Left side content"
+        },
+        {
+          "type": "textarea",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "This is subtitlle"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "This is description"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Click"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "color",
+          "id": "button_bg_color",
+          "label": "Button Background Color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "Button Text Color",
+          "default": "#ffffff"
+        }
+      ]
+    },
+    {
+      "type": "image_block",
+      "name": "Image Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "background_desktop",
+          "label": "Background Image (Desktop)"
+        },
+        {
+          "type": "image_picker",
+          "id": "background_mobile",
+          "label": "Background Image (Mobile)"
+        },
+        {
+          "type": "select",
+          "id": "background_size_desktop",
+          "label": "Background Size (Desktop)",
+          "default": "cover",
+          "options": [
+            { "value": "cover", "label": "Cover" },
+            { "value": "contain", "label": "Contain" },
+            { "value": "auto", "label": "Auto" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "background_size_mobile",
+          "label": "Background Size (Mobile)",
+          "default": "cover",
+          "options": [
+            { "value": "cover", "label": "Cover" },
+            { "value": "contain", "label": "Contain" },
+            { "value": "auto", "label": "Auto" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "video_block",
+      "name": "Video Block",
+      "settings": [
+        {
+          "type": "video_url",
+          "id": "video_url",
+          "label": "Video URL",
+          "default": "https://www.youtube.com/watch?v=VyiSNDxvE8o",
+          "accept": ["youtube", "vimeo"]
+        },
+        {
+          "type": "checkbox",
+          "id": "autoplay",
+          "label": "Autoplay",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "loop",
+          "label": "Loop",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "muted",
+          "label": "Muted",
+          "default": false
+        }
+      ]
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "Split Section",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "text_block"
+        },
+        {
+          "type": "image_block"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

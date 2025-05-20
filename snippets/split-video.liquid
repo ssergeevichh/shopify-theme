@@ -1,0 +1,45 @@
+<div
+  class="split-section__video {% if total_blocks == 1 %}split-section__block--full{% endif %}"
+  style="flex: 1 1 50%; padding: 2rem;"
+>
+  {% assign video_url = block.settings.video_url %}
+  {% assign autoplay = block.settings.autoplay %}
+  {% assign loop = block.settings.loop %}
+  {% assign muted = block.settings.muted %}
+
+  {% if video_url contains 'youtube.com' or video_url contains 'youtu.be' %}
+    <iframe
+      width="100%"
+      height="315"
+      src="https://www.youtube.com/embed/{{ video_url | split: 'v=' | last }}?autoplay={{ autoplay | default: false | json }}&mute={{ muted | default: false | json }}&loop={{ loop | default: false | json }}"
+      title="YouTube video"
+      frameborder="0"
+      allowfullscreen
+    ></iframe>
+
+  {% elsif video_url contains 'vimeo.com' %}
+    <iframe
+      src="https://player.vimeo.com/video/{{ video_url | split: '/' | last }}?autoplay={{ autoplay | default: false | json }}&muted={{ muted | default: false | json }}&loop={{ loop | default: false | json }}"
+      width="100%"
+      height="315"
+      frameborder="0"
+      allowfullscreen
+    ></iframe>
+
+  {% else %}
+    <video
+      src="{{ video_url }}"
+      controls
+      {% if autoplay %}
+        autoplay
+      {% endif %}
+      {% if muted %}
+        muted
+      {% endif %}
+      {% if loop %}
+        loop
+      {% endif %}
+      style="width: 100%; height: auto;"
+    ></video>
+  {% endif %}
+</div>
