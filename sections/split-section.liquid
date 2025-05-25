@@ -1,75 +1,79 @@
-{% assign total_blocks = section.blocks.size %}
+{% liquid
+  assign section_id = section.id
+  assign total_blocks = section.blocks.size
 
-{% if template.name == 'index' %}
+  if total_blocks == 1
+    assign is_full_width = true
+  else
+    assign is_full_width = false
+  endif
+%}
+
+{{ 'section-split.css' | asset_url | stylesheet_tag }}
+<div class="split-content page-width split-section--{{ section_id }}">
   {% for block in section.blocks %}
     {% case block.type %}
       {% when 'text_block' %}
-        {% render 'split-text', block: block, total_blocks: total_blocks %}
+        {% render 'split-text',
+          title: block.settings.title,
+          subtitle: block.settings.subtitle,
+          description: block.settings.description,
+          cta_text: block.settings.cta_text,
+          cta_link: block.settings.cta_link,
+          cta_bg_color: block.settings.cta_bg_color,
+          cta_text_color: block.settings.cta_text_color,
+          is_full_width: is_full_width
+        %}
       {% when 'image_block' %}
-        {% render 'split-image', block: block, total_blocks: total_blocks %}
+        {% render 'split-image',
+          background_desktop: block.settings.background_desktop,
+          background_mobile: block.settings.background_mobile,
+          background_size_desktop: block.settings.background_size_desktop,
+          background_size_mobile: block.settings.background_size_mobile,
+          is_full_width: is_full_width,
+          section_id: section_id
+        %}
       {% when 'video_block' %}
-        {% render 'split-video', block: block, total_blocks: total_blocks %}
+        {% render 'split-video',
+          autoplay: block.settings.autoplay,
+          loop: block.settings.loop,
+          muted: block.settings.muted,
+          video_mp4: block.settings.video_mp4,
+          video_url: block.settings.video_url
+        %}
     {% endcase %}
   {% endfor %}
-{% endif %}
+</div>
 
 <style>
-  .split-section__text {
-    flex: 0 0 {{ section.settings.left_block_width | append: '%' }};
+  .split-section--{{ section_id }} .split-content__text {
+    flex: 0 0 {{ section.settings.text_block_width | append: '%' }};
   }
 
-  .split-section__image {
-    flex: 0 0 {{ section.settings.right_block_width | append: '%' }};
-  }
-</style>
-
-{% stylesheet %}
-  .split-section {
-    display: flex;
-    flex-wrap: wrap;
-    background-image: url('{{ section.settings.background_desktop | image_url }}');
-    background-size: '{{ section.settings.background_size_desktop }}';
-    background-position: center;
-    background-repeat: no-repeat;
-    align-items: stretch;
-  }
-  .split-section__block {
-    flex: 1 1 50%;
-    padding: 2rem;
+  .split-section--{{ section_id }} .split-content__image,
+  .split-section--{{ section_id }} .split-content__video {
+    flex: 0 0 {{ section.settings.media_block_width | append: '%' }};
   }
 
-  .split-section__block--full {
+  .split-section--{{ section_id }} .split-content__block--full {
     flex: 1 1 100%;
   }
-  .split-section__block h2 {
-    margin-bottom: 1rem;
-  }
-  .split-section__block img {
-    max-width: 100%;
-    height: auto;
-  }
-  .btn {
-    background-color: #000;
-    color: #fff;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    cursor: pointer;
-  }
-  .btn:hover {
-    background-color: #333;
-  }
-{% endstylesheet %}
+</style>
 
 {% schema %}
 {
   "name": "Split Section",
   "tag": "section",
   "class": "split-section",
+  "enabled_on": {
+    "templates": ["index"]
+  },
+  "max_blocks": 2,
   "settings": [
     {
       "type": "range",
-      "id": "left_block_width",
-      "label": "Left Block Width (%)",
+      "id": "text_block_width",
+      "label": "Text Block Width (%)",
       "min": 0,
       "max": 100,
       "step": 5,
@@ -77,8 +81,8 @@
     },
     {
       "type": "range",
-      "id": "right_block_width",
-      "label": "Right Block Width (%)",
+      "id": "media_block_width",
+      "label": "Media Block Width (%)",
       "min": 0,
       "max": 100,
       "step": 5,
@@ -94,41 +98,41 @@
           "type": "text",
           "id": "title",
           "label": "Title",
-          "default": "Left side content"
+          "default": "Title"
         },
         {
           "type": "textarea",
           "id": "subtitle",
           "label": "Subtitle",
-          "default": "This is subtitlle"
+          "default": "Subtitle"
         },
         {
           "type": "textarea",
           "id": "description",
           "label": "Description",
-          "default": "This is description"
+          "default": "Description"
         },
         {
           "type": "text",
-          "id": "button_text",
-          "label": "Button Text",
-          "default": "Click"
+          "id": "cta_text",
+          "label": "CTA Text",
+          "default": "CTA Button"
         },
         {
           "type": "url",
-          "id": "button_link",
-          "label": "Button Link"
+          "id": "cta_link",
+          "label": "CTA Link"
         },
         {
           "type": "color",
-          "id": "button_bg_color",
-          "label": "Button Background Color",
+          "id": "cta_bg_color",
+          "label": "CTA Background Color",
           "default": "#000000"
         },
         {
           "type": "color",
-          "id": "button_text_color",
-          "label": "Button Text Color",
+          "id": "cta_text_color",
+          "label": "CTA Text Color",
           "default": "#ffffff"
         }
       ]
@@ -176,9 +180,14 @@
       "name": "Video Block",
       "settings": [
         {
+          "type": "url",
+          "id": "video_mp4",
+          "label": "MP4 Video URL"
+        },
+        {
           "type": "video_url",
           "id": "video_url",
-          "label": "Video URL",
+          "label": "Hosting Video URL",
           "default": "https://www.youtube.com/watch?v=VyiSNDxvE8o",
           "accept": ["youtube", "vimeo"]
         },
@@ -213,7 +222,10 @@
           "type": "text_block"
         },
         {
-          "type": "image_block"
+          "type": "image_block",
+          "settings": {
+            "background_desktop": "shopify://shop_images/tshirts.jpg"
+          }
         }
       ]
     }

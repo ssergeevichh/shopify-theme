@@ -1,10 +1,25 @@
-<div class="split-section__block split-section__image {% if total_blocks == 1 %}split-section__block--full{% endif %}">
+{%- comment -%}
+  Props:
+  - background_desktop (image object) — desktop image object
+  - background_mobile (image object) — mobile image object
+  - background_size_desktop (string) — e.g., 'cover', 'contain'
+  - background_size_mobile (string) — e.g., 'cover', 'contain'
+  - section_id (string) — unique section identifier
+  - is_full_width (boolean) — true if it's the only block
+{%- endcomment -%}
+
+{%- assign desktop_url = background_desktop | image_url -%}
+{%- assign fallback_url = 'tshirts.jpg' | asset_url -%}
+{%- assign image_url = desktop_url | default: fallback_url -%}
+
+<div class="split-content__block split-content__image{% if is_full_width %} split-content__block--full{% endif %}">
   &nbsp;
 </div>
+
 <style>
-  .split-section__image {
-    background-image: url('{{ block.settings.background_desktop | image_url }}');
-    background-size: {{ block.settings.background_size_desktop }};
+  .split-section--{{ section_id }} .split-content__image {
+    background-image: url('{{ image_url }}');
+    background-size: {{ background_size_desktop }};
     background-position: center;
     background-repeat: no-repeat;
     padding: 2rem;
@@ -12,9 +27,9 @@
   }
 
   @media (max-width: 749px) {
-    .split-section__image {
-        background-image: url('{{ block.settings.background_mobile | image_url }}');
-        background-size: {{ block.settings.background_size_mobile }};
+    .split-section--{{ section_id }} .split-content__image {
+      background-image: url('{{ background_mobile | image_url }}');
+      background-size: {{ background_size_mobile }};
     }
   }
 </style>

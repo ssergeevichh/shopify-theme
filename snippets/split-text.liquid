@@ -1,12 +1,26 @@
-<div class="split-section__block split-section__text {% if total_blocks == 1 %}split-section__block--full{% endif %}">
-  {% if block.settings.title != blank %}
-    <h2>{{ block.settings.title }}</h2>
+{%- comment -%}
+  Props:
+  - title (string) — the title of the text block
+  - subtitle (string) — the subtitle of the text block
+  - description (string) — the description text
+  - cta_text (string) — cta button text
+  - cta_link (string) — URL for the cta button
+  - cta_bg_color (string) — background color for the cta button
+  - cta_text_color (string) — text color for the cta button
+  - is_full_width (boolean) — true if this block should take full width
+{%- endcomment -%}
+
+<div class="split-content__block split-content__text {% if is_full_width %}split-content__block--full{% endif %}">
+  {% if title != blank %}
+    <h2>
+      {{ title }}
+    </h2>
   {% endif %}
-  {% if block.settings.subtitle != blank %}
-    <h3>{{ block.settings.subtitle }}</h3>
+  {% if subtitle != blank %}
+    <h3>{{ subtitle }}</h3>
   {% endif %}
-  {% if block.settings.description != blank %}
-    <p>{{ block.settings.description }}</p>
+  {% if description != blank %}
+    <p>{{ description }}</p>
   {% endif %}
-  {% render 'split-button', block: block %}
+  {% render 'split-button', link: cta_link, text: cta_text, bg_color: cta_bg_color, text_color: cta_text_color %}
 </div>
