@@ -1,13 +1,27 @@
 {%- comment -%}
-  Props:
-  - title (string) — the title of the text block
-  - subtitle (string) — the subtitle of the text block
-  - description (string) — the description text
-  - cta_text (string) — cta button text
-  - cta_link (string) — URL for the cta button
-  - cta_bg_color (string) — background color for the cta button
-  - cta_text_color (string) — text color for the cta button
-  - is_full_width (boolean) — true if this block should take full width
+  Text Block Snippet
+
+  Accepts:
+  - title: {String} The main heading text
+  - subtitle: {String} The subheading or secondary title
+  - description: {String} The body or description text
+  - cta_text: {String} The label on the CTA button
+  - cta_link: {String} The destination URL for the CTA
+  - cta_bg_color: {String} Background color of the CTA button
+  - cta_text_color: {String} Text color of the CTA button
+  - is_full_width: {Boolean} If true, the block spans full width
+
+  Usage:
+  {% render 'split-text',
+    title: 'Explore the Collection',
+    subtitle: 'New Arrivals',
+    description: 'Check out our latest products, handpicked for the season.',
+    cta_text: 'Shop Now',
+    cta_link: '/collections/new',
+    cta_bg_color: '#1a1a1a',
+    cta_text_color: '#ffffff',
+    is_full_width: true
+  %}
 {%- endcomment -%}
 
 <div class="split-content__block split-content__text {% if is_full_width %}split-content__block--full{% endif %}">

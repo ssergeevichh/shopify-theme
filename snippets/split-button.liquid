@@ -1,9 +1,19 @@
 {%- comment -%}
-  Props:
-  - text (string) — the button text
-  - link (string) — the URL the button leads to
-  - bg_color (string) — background color of the button
-  - text_color (string) — text color of the button
+  Split Button Snippet
+
+  Accepts:
+  - text: {String} The button label
+  - link: {String} The URL the button leads to
+  - bg_color: {String} Background color of the button
+  - text_color: {String} Text color of the button
+
+  Usage:
+  {% render 'split-button',
+    text: 'Click Me',
+    link: '/collections/all',
+    bg_color: '#000000',
+    text_color: '#ffffff'
+  %}
 {%- endcomment -%}
 
 <a

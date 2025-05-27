@@ -30,6 +30,7 @@
           background_mobile: block.settings.background_mobile,
           background_size_desktop: block.settings.background_size_desktop,
           background_size_mobile: block.settings.background_size_mobile,
+          image_alt: block.settings.image_alt,
           is_full_width: is_full_width,
           section_id: section_id
         %}
@@ -152,6 +153,11 @@
           "label": "Background Image (Mobile)"
         },
         {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image Alt Text"
+        },
+        {
           "type": "select",
           "id": "background_size_desktop",
           "label": "Background Size (Desktop)",
@@ -222,10 +228,7 @@
           "type": "text_block"
         },
         {
-          "type": "image_block",
-          "settings": {
-            "background_desktop": "shopify://shop_images/tshirts.jpg"
-          }
+          "type": "image_block"
         }
       ]
     }

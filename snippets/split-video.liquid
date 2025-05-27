@@ -1,15 +1,22 @@
 {%- comment -%}
-  Props:
-  - title (string) — the title of the text block
-  - subtitle (string) — the subtitle of the text block
-  - description (string) — the description text
-  - cta_text (string) — cta button text
-  - cta_link (string) — URL for the cta button
-  - cta_bg_color (string) — background color for the cta button
-  - cta_text_color (string) — text color for the cta button
-  - is_full_width (boolean) — true if this block should take full width
-{%- endcomment -%}
+  Split Video Snippet
 
+  Accepts:
+  - autoplay: {Boolean} Automatically start video playback
+  - loop: {Boolean} Replay video continuously
+  - muted: {Boolean} Start video with audio muted
+  - video_mp4: {String} URL to the MP4 video file
+  - video_url: {String} External video URL (e.g., YouTube or Vimeo)
+
+  Usage:
+  {% render 'split-video',
+    autoplay: block.settings.autoplay,
+    loop: block.settings.loop,
+    muted: block.settings.muted,
+    video_mp4: block.settings.video_mp4,
+    video_url: block.settings.video_url
+  %}
+{%- endcomment -%}
 {% liquid
   assign yt_raw_id = video_url | split: 'v=' | last | split: '&' | first
   assign vimeo_id = video_url | split: '/' | last

@@ -1,24 +1,57 @@
 {%- comment -%}
-  Props:
-  - background_desktop (image object) — desktop image object
-  - background_mobile (image object) — mobile image object
-  - background_size_desktop (string) — e.g., 'cover', 'contain'
-  - background_size_mobile (string) — e.g., 'cover', 'contain'
-  - section_id (string) — unique section identifier
-  - is_full_width (boolean) — true if it's the only block
+  Split Image Snippet
+
+  Accepts:
+  - background_desktop: {String} URL for the desktop background image
+  - background_mobile: {String} URL for the mobile background image
+  - image_alt: {String} Alt text for the image
+  - background_size_desktop: {String} Background size for desktop (default: 'cover')
+  - background_size_mobile: {String} Background size for mobile (default: 'cover')
+  - is_full_width: {Boolean} True if this block should take full width
+  - section_id: {Number} Unique section ID for styling
+
+  Usage:
+    {% render 'split-image',
+      background_desktop: 'desktop-image.jpg',
+      background_mobile: 'mobile-image.jpg',
+      image_alt: 'A descriptive alt text',
+      background_size_desktop: 'cover',
+      background_size_mobile: 'cover',
+      is_full_width: true,
+      section_id: section.id
+    %}
 {%- endcomment -%}
 
-{%- assign desktop_url = background_desktop | image_url -%}
-{%- assign fallback_url = 'tshirts.jpg' | asset_url -%}
-{%- assign image_url = desktop_url | default: fallback_url -%}
+{% liquid
+  if window.innerWidth < 750
+    assign image_url = background_mobile | image_url
+  else
+    assign image_url = background_desktop | image_url
+  endif
+
+  assign fallback_url = 'tshirts.jpg' | asset_url
+%}
 
 <div class="split-content__block split-content__image{% if is_full_width %} split-content__block--full{% endif %}">
-  &nbsp;
+  {% if image_url != blank %}
+    <img
+      src="{{ image_url }}"
+      alt="{{ image_alt | default: 'Split section image' }}"
+      width="100%"
+      height="auto"
+    >
+  {% else %}
+    <img
+      src="{{ fallback_url }}"
+      alt="{{ image_alt | default: 'Fallback image' }}"
+      width="100%"
+      height="auto"
+    >
+  {% endif %}
 </div>
 
 <style>
   .split-section--{{ section_id }} .split-content__image {
-    background-image: url('{{ image_url }}');
     background-size: {{ background_size_desktop }};
     background-position: center;
     background-repeat: no-repeat;
@@ -28,7 +61,6 @@
 
   @media (max-width: 749px) {
     .split-section--{{ section_id }} .split-content__image {
-      background-image: url('{{ background_mobile | image_url }}');
       background-size: {{ background_size_mobile }};
     }
   }
