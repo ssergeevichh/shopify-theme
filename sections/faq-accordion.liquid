@@ -14,8 +14,8 @@
   <div class="faq-list">
     {% for block in section.blocks %}
       {% render 'faq-item',
-        title: block.settings.question,
-        content: block.settings.answer,
+        title: block.settings.title,
+        content: block.settings.content,
         icon: block.settings.icon,
         is_open: block.settings.is_open
       %}
