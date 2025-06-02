@@ -12,16 +12,7 @@
   - is_full_width: {Boolean} If true, the block spans full width
 
   Usage:
-  {% render 'split-text',
-    title: 'Explore the Collection',
-    subtitle: 'New Arrivals',
-    description: 'Check out our latest products, handpicked for the season.',
-    cta_text: 'Shop Now',
-    cta_link: '/collections/new',
-    cta_bg_color: '#1a1a1a',
-    cta_text_color: '#ffffff',
-    is_full_width: true
-  %}
+  {% render 'split-text' %}
 {%- endcomment -%}
 
 <div class="split-content__block split-content__text {% if is_full_width %}split-content__block--full{% endif %}">

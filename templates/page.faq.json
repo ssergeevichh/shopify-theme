@@ -1,16 +1,16 @@
 {
-    "name": "FAQ Page",
-    "sections": {
-      "faq": {
-        "type": "faq-accordion"
-      },
-      "split": {
-        "type": "split-section"
-      }
+  "name": "FAQ Page",
+  "sections": {
+    "faq": {
+      "type": "faq-accordion"
     },
-    "order": [
-      "faq",
-      "split"
-    ]
-  }
+    "split": {
+      "type": "split-section"
+    }
+  },
+  "order": [
+    "faq",
+    "split"
+  ]
+}
   

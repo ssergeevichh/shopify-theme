@@ -5,20 +5,20 @@
     - title: {String} The FAQ question
     - content: {String} The FAQ answer
     - icon: {String} URL for icon for the FAQ item
+    - icon_position: {String} Position of the icon, e.g., 'left' or 'right'
     - is_open: {Boolean} If true, the answer is visible by default
 
   Usage:
-  {% render 'faq-item',
-    title: 'What is your return policy?',
-    content: 'You can return any item within 30 days of purchase.',
-    icon: 'icon-url.svg',
-    is_open: false
-  %}
+  {% render 'faq-item' %}
 {%- endcomment -%}
 
 {% liquid
   assign icon_url = icon | image_url
   assign fallback_icon = 'icon-info.svg' | asset_url
+  assign icon_position_class = 'faq-item__icon--left'
+  if icon_position == 'right'
+    assign icon_position_class = 'faq-item__icon--right'
+  endif
 %}
 
 <div class="faq-item {% if is_open %}faq-item--open{% endif %}">
@@ -26,26 +26,30 @@
     <img
       src="{{ icon_url }}"
       alt="FAQ Icon"
-      class="faq-item__icon"
-      width="30px"
-      height="30px"
+      class="faq-item__icon {{ icon_position_class }}"
+      width="20px"
+      height="20px"
     >
   {% else %}
     <img
       src="{{ fallback_icon }}"
       alt="FAQ Icon"
-      class="faq-item__icon"
-      width="30px"
-      height="30px"
+      class="faq-item__icon {{ icon_position_class }}"
+      width="20px"
+      height="20px"
     >
   {% endif %}
 
-  <div class="faq-item__content">
-    <h3 class="faq-item__question">
-      {{ title | default: 'Title' }}
-    </h3>
-    <div class="faq-item__answer">
-      {{ content | default: 'Content' }}
-    </div>
+  <div class="faq-item__wrapper">
+    {% if title != blank %}
+      <h3 class="faq-item__title">{{ title }}</h3>
+    {% else %}
+      <h3 class="faq-item__title">Title</h3>
+    {% endif %}
+    {% if content != blank %}
+      <div class="faq-item__content">{{ content }}</div>
+    {% else %}
+      <div class="faq-item__content">Content</div>
+    {% endif %}
   </div>
 </div>
