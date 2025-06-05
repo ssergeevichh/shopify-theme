@@ -1,0 +1,55 @@
+{%- comment -%}
+  Accordion Item Snippet
+
+  Accepts:
+    - title: {String} The accordion title
+    - content: {String} The accordion content
+    - icon: {String} URL for the icon to display
+    - icon_position: {String} Position of the icon, e.g., 'left' or 'right'
+    - is_open: {Boolean} If true, the answer is visible by default
+
+  Usage:
+  {% render 'accordion-item' %}
+{%- endcomment -%}
+
+{% liquid
+  assign icon_url = icon | image_url
+  assign fallback_icon = 'icon-info.svg' | asset_url
+  assign icon_position_class = 'accordion-item__icon--left'
+  if icon_position == 'right'
+    assign icon_position_class = 'accordion-item__icon--right'
+  endif
+%}
+
+<div class="accordion-item {% if is_open %}accordion-item--open{% endif %}">
+  {% if icon != blank %}
+    <img
+      src="{{ icon_url }}"
+      alt="Accordion Icon"
+      class="accordion-item__icon {{ icon_position_class }}"
+      width="20px"
+      height="20px"
+    >
+  {% else %}
+    <img
+      src="{{ fallback_icon }}"
+      alt="Accordion Icon"
+      class="accordion-item__icon {{ icon_position_class }}"
+      width="20px"
+      height="20px"
+    >
+  {% endif %}
+
+  <div class="accordion-item__wrapper">
+    {% if title != blank %}
+      <h3 class="accordion-item__title">{{ title }}</h3>
+    {% else %}
+      <h3 class="accordion-item__title">Title</h3>
+    {% endif %}
+    {% if content != blank %}
+      <div class="accordion-item__content">{{ content }}</div>
+    {% else %}
+      <div class="accordion-item__content">Content</div>
+    {% endif %}
+  </div>
+</div>

@@ -5,10 +5,10 @@
   assign padding_bottom = section.settings.padding_bottom | default: 20
 %}
 
-{{ 'section-faq.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'faq.js' | asset_url }}" defer="defer"></script>
+{{ 'accordion-component.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'accordion.js' | asset_url }}" defer="defer"></script>
 
-<faq-accordion
+<div
   class="faq-content page-width"
   style="padding-top: {{ padding_top }}px; padding-bottom: {{ padding_bottom }}px;"
 >
@@ -17,9 +17,9 @@
     <p class="faq-content__description">{{ description }}</p>
   </div>
 
-  <div class="faq-list">
+  <x-accordion class="accordion-list">
     {% for block in section.blocks %}
-      {% render 'faq-item',
+      {% render 'accordion-item',
         title: block.settings.title,
         content: block.settings.content,
         icon: block.settings.icon,
@@ -27,12 +27,12 @@
         is_open: block.settings.is_open
       %}
     {% endfor %}
-  </div>
-</faq-accordion>
+  </x-accordion>
+</div>
 
 {% schema %}
 {
-  "name": "FAQ Accordion",
+  "name": "FAQ Section",
   "settings": [
     {
       "type": "text",
