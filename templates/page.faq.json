@@ -9,31 +9,31 @@
  */
 {
   "sections": {
-    "faq": {
-      "type": "faq-accordion",
+    "faq_section_6ENfez": {
+      "type": "faq-section",
       "blocks": {
-        "faq_item_ePtKrk": {
-          "type": "faq_item",
+        "accordion_item_NDecwV": {
+          "type": "accordion_item",
           "settings": {
-            "title": "повідомлення 1",
-            "content": "Ваня, привіт",
+            "title": "message 1",
+            "content": "hello, Vania",
             "is_open": false,
             "icon_position": "left"
           }
         },
-        "faq_item_xVk3ec": {
-          "type": "faq_item",
+        "accordion_item_FF7wJg": {
+          "type": "accordion_item",
           "settings": {
-            "title": "повідомлення 2",
-            "content": "я все зробив",
+            "title": "message 2",
+            "content": "we did it",
             "is_open": false,
             "icon_position": "left"
           }
         },
-        "faq_item_m3J4bQ": {
-          "type": "faq_item",
+        "accordion_item_wD6CdE": {
+          "type": "accordion_item",
           "settings": {
-            "title": "повідомлення 3",
+            "title": "message 3",
             "content": ":)",
             "is_open": false,
             "icon_position": "left"
@@ -41,10 +41,11 @@
         }
       },
       "block_order": [
-        "faq_item_ePtKrk",
-        "faq_item_xVk3ec",
-        "faq_item_m3J4bQ"
+        "accordion_item_NDecwV",
+        "accordion_item_FF7wJg",
+        "accordion_item_wD6CdE"
       ],
+      "name": "Accordion Item",
       "settings": {
         "title": "Title",
         "description": "Description",
@@ -88,7 +89,7 @@
     }
   },
   "order": [
-    "faq",
+    "faq_section_6ENfez",
     "split_section_8CrWrr"
   ]
 }
