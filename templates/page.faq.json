@@ -1,16 +1,94 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-  "name": "FAQ Page",
   "sections": {
     "faq": {
-      "type": "faq-accordion"
+      "type": "faq-accordion",
+      "blocks": {
+        "faq_item_ePtKrk": {
+          "type": "faq_item",
+          "settings": {
+            "title": "повідомлення 1",
+            "content": "Ваня, привіт",
+            "is_open": false,
+            "icon_position": "left"
+          }
+        },
+        "faq_item_xVk3ec": {
+          "type": "faq_item",
+          "settings": {
+            "title": "повідомлення 2",
+            "content": "я все зробив",
+            "is_open": false,
+            "icon_position": "left"
+          }
+        },
+        "faq_item_m3J4bQ": {
+          "type": "faq_item",
+          "settings": {
+            "title": "повідомлення 3",
+            "content": ":)",
+            "is_open": false,
+            "icon_position": "left"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_ePtKrk",
+        "faq_item_xVk3ec",
+        "faq_item_m3J4bQ"
+      ],
+      "settings": {
+        "title": "Title",
+        "description": "Description",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
     },
-    "split": {
-      "type": "split-section"
+    "split_section_8CrWrr": {
+      "type": "split-section",
+      "blocks": {
+        "text_block_NLzGxU": {
+          "type": "text_block",
+          "settings": {
+            "title": "Title",
+            "subtitle": "Subtitle",
+            "description": "Description",
+            "cta_text": "CTA Button",
+            "cta_link": "",
+            "cta_bg_color": "#000000",
+            "cta_text_color": "#ffffff"
+          }
+        },
+        "image_block_fYxDxD": {
+          "type": "image_block",
+          "settings": {
+            "image_alt": "",
+            "background_size_desktop": "cover",
+            "background_size_mobile": "cover"
+          }
+        }
+      },
+      "block_order": [
+        "text_block_NLzGxU",
+        "image_block_fYxDxD"
+      ],
+      "name": "Split Section",
+      "settings": {
+        "text_block_width": 50,
+        "media_block_width": 50
+      }
     }
   },
   "order": [
     "faq",
-    "split"
+    "split_section_8CrWrr"
   ]
 }
-  
