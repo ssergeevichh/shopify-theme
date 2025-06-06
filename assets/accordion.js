@@ -1,22 +1,29 @@
-class Accordion extends HTMLElement {
+class AccordionItem extends HTMLElement {
     constructor() {
         super();
         this.handleClick = this.handleClick.bind(this);
     }
 
     connectedCallback() {
-        this.addEventListener('click', this.handleClick);
+        const title = this.querySelector('[data-accordion-title]');
+        if (title) {
+          title.addEventListener('click', this.handleClick);
+        }
     }
 
-    handleClick(event) {
-        const titleClicked = event.target.closest('.accordion-item__title');
-        if (!titleClicked) return;
+    handleClick() {
+        this.removeAllActive();
+        this.classList.toggle('accordion-item--open');
+    }
 
-        const accordionItem = titleClicked.closest('.accordion-item');
-        if (accordionItem) {
-            accordionItem.classList.toggle('accordion-item--open');
-        }
+    removeAllActive() {
+        const items = this.parentElement.querySelectorAll('[data-accordion-item]');
+        items.forEach((item) => {
+            if (item !== this) {
+                item.classList.remove('accordion-item--open');
+            }
+        });
     }
 }
 
-customElements.define('x-accordion', Accordion);
+customElements.define('accordion-item', AccordionItem);

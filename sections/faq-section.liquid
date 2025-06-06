@@ -17,7 +17,7 @@
     <p class="faq-content__description">{{ description }}</p>
   </div>
 
-  <x-accordion class="accordion-list">
+  <div class="accordion-list">
     {% for block in section.blocks %}
       {% render 'accordion-item',
         title: block.settings.title,
@@ -27,7 +27,7 @@
         is_open: block.settings.is_open
       %}
     {% endfor %}
-  </x-accordion>
+  </div>
 </div>
 
 {% schema %}

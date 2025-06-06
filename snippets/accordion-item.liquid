@@ -21,7 +21,7 @@
   endif
 %}
 
-<div class="accordion-item {% if is_open %}accordion-item--open{% endif %}">
+<accordion-item data-accordion-item class="accordion-item {% if is_open %}accordion-item--open{% endif %}">
   {% if icon != blank %}
     <img
       src="{{ icon_url }}"
@@ -42,9 +42,9 @@
 
   <div class="accordion-item__wrapper">
     {% if title != blank %}
-      <h3 class="accordion-item__title">{{ title }}</h3>
+      <h3 class="accordion-item__title" data-accordion-title>{{ title }}</h3>
     {% else %}
-      <h3 class="accordion-item__title">Title</h3>
+      <h3 class="accordion-item__title" data-accordion-title>Title</h3>
     {% endif %}
     {% if content != blank %}
       <div class="accordion-item__content">{{ content }}</div>
@@ -52,4 +52,4 @@
       <div class="accordion-item__content">Content</div>
     {% endif %}
   </div>
-</div>
+</accordion-item>
