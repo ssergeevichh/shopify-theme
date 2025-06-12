@@ -9,50 +9,6 @@
  */
 {
   "sections": {
-    "faq_section_6ENfez": {
-      "type": "faq-section",
-      "blocks": {
-        "accordion_item_NDecwV": {
-          "type": "accordion_item",
-          "settings": {
-            "title": "message 1",
-            "content": "hello, Vania",
-            "is_open": false,
-            "icon_position": "left"
-          }
-        },
-        "accordion_item_FF7wJg": {
-          "type": "accordion_item",
-          "settings": {
-            "title": "message 2",
-            "content": "we did it",
-            "is_open": false,
-            "icon_position": "left"
-          }
-        },
-        "accordion_item_wD6CdE": {
-          "type": "accordion_item",
-          "settings": {
-            "title": "message 3",
-            "content": ":)",
-            "is_open": false,
-            "icon_position": "left"
-          }
-        }
-      },
-      "block_order": [
-        "accordion_item_NDecwV",
-        "accordion_item_FF7wJg",
-        "accordion_item_wD6CdE"
-      ],
-      "name": "Accordion Item",
-      "settings": {
-        "title": "Title",
-        "description": "Description",
-        "padding_top": 20,
-        "padding_bottom": 20
-      }
-    },
     "split_section_8CrWrr": {
       "type": "split-section",
       "blocks": {
@@ -86,10 +42,40 @@
         "text_block_width": 50,
         "media_block_width": 50
       }
+    },
+    "faq_section_YkdYa9": {
+      "type": "faq-section",
+      "blocks": {
+        "accordion_item_hyWetw": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "What is your return policy?",
+            "content": "You can return any item within 30 days of purchase.",
+            "is_open": false,
+            "icon_position": "left"
+          }
+        }
+      },
+      "block_order": [
+        "accordion_item_hyWetw"
+      ],
+      "name": "FAQ Section",
+      "settings": {
+        "title": "Title",
+        "description": "Description",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "faq_banner_V6aftg": {
+      "type": "faq-banner",
+      "name": "FAQ Banner",
+      "settings": {}
     }
   },
   "order": [
-    "faq_section_6ENfez",
+    "faq_banner_V6aftg",
+    "faq_section_YkdYa9",
     "split_section_8CrWrr"
   ]
 }
