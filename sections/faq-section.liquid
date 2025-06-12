@@ -3,6 +3,8 @@
   assign description = section.settings.description
   assign padding_top = section.settings.padding_top | default: 20
   assign padding_bottom = section.settings.padding_bottom | default: 20
+
+  assign faq_items = page.metafields.custom.faq_items.value
 %}
 
 {{ 'accordion-component.css' | asset_url | stylesheet_tag }}
@@ -28,6 +30,20 @@
       %}
     {% endfor %}
   </div>
+
+  {% if faq_items != blank %}
+    <div class="accordion-list">
+      {% for faq in faq_items %}
+        {% render 'accordion-item',
+          title: faq.title,
+          content: faq.content,
+          icon: faq.icon,
+          icon_position: 'left',
+          is_open: false
+        %}
+      {% endfor %}
+    </div>
+  {% endif %}
 </div>
 
 {% schema %}
@@ -102,7 +118,7 @@
   ],
   "presets": [
     {
-      "name": "Accordion Item",
+      "name": "FAQ Section",
       "category": "Custom",
       "blocks": [
         {

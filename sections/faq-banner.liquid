@@ -1,0 +1,51 @@
+{% liquid
+  assign image_url = page.metafields.custom.faq_banner | image_url
+  assign fallback_image = 'tshirts.jpg' | asset_url
+%}
+
+<div class="faq-banner"></div>
+{% if image_url != blank %}
+  <img
+    src="{{ image_url }}"
+    alt="FAQ Banner"
+    class="faq-banner__image"
+    width="100%"
+    height="auto"
+  >
+{% else %}
+  <img
+    src="{{ fallback_image }}"
+    alt="FAQ Banner"
+    class="faq-banner__image"
+    width="100%"
+    height="auto"
+  >
+{% endif %}
+
+<style>
+  .faq-banner {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
+  .faq-banner__image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "FAQ Banner",
+  "settings": [],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "FAQ Banner",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
