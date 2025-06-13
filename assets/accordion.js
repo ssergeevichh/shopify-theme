@@ -1,14 +1,14 @@
 class AccordionItem extends HTMLElement {
     constructor() {
         super();
-        this.title = this.querySelector('[data-accordion-title]');
-        this.items = this.querySelectorAll('[data-accordion-item]');
+        this.heading = this.querySelector('[data-accordion-title]');
+        this.items = document.querySelectorAll('[data-accordion-item]');
         
         this.handleClick = this.handleClick.bind(this);
     }
 
     connectedCallback() {
-        this.title.addEventListener('click', this.handleClick);
+        this.heading.addEventListener('click', this.handleClick);
     }
 
     handleClick() {
