@@ -2888,18 +2888,6 @@ details-disclosure>details {
   position: relative;
 }
 
-/* ===== FAQ Section Styles ===== */
-.faq-item {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 15px 0;
-}
-
-.faq-item__icon {
-  object-fit: contain;
-}
-
 @keyframes animateMenuOpen {
   0% {
     opacity: 0;

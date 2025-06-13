@@ -9,13 +9,7 @@
   - video_url: {String} External video URL (e.g., YouTube or Vimeo)
 
   Usage:
-  {% render 'split-video',
-    autoplay: block.settings.autoplay,
-    loop: block.settings.loop,
-    muted: block.settings.muted,
-    video_mp4: block.settings.video_mp4,
-    video_url: block.settings.video_url
-  %}
+  {% render 'split-video' %}
 {%- endcomment -%}
 {% liquid
   assign yt_raw_id = video_url | split: 'v=' | last | split: '&' | first
