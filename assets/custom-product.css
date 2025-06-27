@@ -172,4 +172,14 @@
     .product-layout .product-gallery-thumbs {
         display: none;
     }
+
+    .product-layout {
+        flex-direction: column;
+    }
+
+
+    .product-gallery,
+    .product-info {
+        width: 100%;
+    }
 }
