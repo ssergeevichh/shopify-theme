@@ -1,0 +1,42 @@
+{%- comment -%}
+  Custom Product Price Snippet
+
+  Accepts:
+      - price {Number}
+      - compare_at_price {Number}
+
+  Usage:
+  {% render 'custom-product-price' %}
+{%- endcomment -%}
+
+{%- liquid
+  assign sale_in_percentage = 0
+
+  if price != blank and compare_at_price != blank and compare_at_price > price
+    assign sale_ratio = price | times: 100 | divided_by: compare_at_price
+    assign sale_in_percentage = 100 | minus: sale_ratio | round
+  endif
+
+  assign price = price | money
+  assign compare_at_price = compare_at_price | money
+-%}
+
+{% if price != blank %}
+  <div class="price">
+    <div class="price-item price-item--regular {% if compare_at_price != blank and compare_at_price > price %}price-item--sale{% endif %}">
+      <span class="value">
+        {{ price }}
+      </span>
+    </div>
+    {% if compare_at_price != blank %}
+      <div class="price-item price-item--old">
+        <span class="value">
+          {{ compare_at_price }}
+        </span>
+      </div>
+    {% endif %}
+    {% if sale_in_percentage > 0 %}
+      <div class="price-sale-badge">знижка {{ sale_in_percentage }}%</div>
+    {% endif %}
+  </div>
+{% endif %}

@@ -1,0 +1,48 @@
+{%- comment -%}
+  Product Slider Snippet
+
+  Accepts:
+      - media {Array} Array of media objects to display in the slider
+
+  Usage:
+  {% render 'custom-product-slider' %}
+{%- endcomment -%}
+
+<div class="product-gallery">
+  <div class="swiper product-gallery-swiper">
+    <div class="swiper-wrapper">
+      {% for item in media %}
+        {% if item.media_type == 'image' %}
+          <div class="swiper-slide">
+            <img
+              src="{{ item.preview_image | image_url }}"
+              alt="{{ item.alt }}"
+              width="100%"
+              height="auto"
+            >
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="swiper-button swiper-button-next">&nbsp;</div>
+    <div class="swiper-button swiper-button-prev">&nbsp;</div>
+  </div>
+
+  <div class="swiper product-gallery-thumbs">
+    <div class="swiper-wrapper">
+      {% for item in media %}
+        {% if item.media_type == 'image' %}
+          <div class="swiper-slide">
+            <img
+              src="{{ item.preview_image | image_url }}"
+              alt="{{ item.alt }}"
+              width="100"
+              height="auto"
+            >
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "custom-product",
+      "blocks": {
+        "product_slider_QwLwq6": {
+          "type": "product_slider",
+          "settings": {}
+        },
+        "product_info_UEDrrK": {
+          "type": "product_info",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "product_slider_QwLwq6",
+        "product_info_UEDrrK"
+      ],
+      "settings": {}
+    },
+    "faq_section_zkbKC7": {
+      "type": "faq-section",
+      "blocks": {
+        "accordion_item_J3hRqp": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "What is your return policy?",
+            "content": "You can return any item within 30 days of purchase.",
+            "is_open": false,
+            "icon_position": "left"
+          }
+        }
+      },
+      "block_order": [
+        "accordion_item_J3hRqp"
+      ],
+      "name": "FAQ Section",
+      "settings": {
+        "title": "Title",
+        "description": "Description",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    }
+  },
+  "order": [
+    "main",
+    "faq_section_zkbKC7"
+  ]
+}

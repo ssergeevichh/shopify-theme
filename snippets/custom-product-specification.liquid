@@ -1,0 +1,21 @@
+{%- comment -%}
+  Custom Product Specification Snippet
+
+  Accepts:
+      - specifications {Array} Array of product specifications, each with a title and content
+
+  Usage:
+      {% render 'custom-product-specification' %}
+{%- endcomment -%}
+
+<div class="product-specifications">
+  {% for spec in specifications %}
+    {% render 'accordion-item',
+      title: spec.title,
+      content: spec.description,
+      icon: spec.icon,
+      icon_position: 'left',
+      is_open: forloop.first
+    %}
+  {% endfor %}
+</div>

@@ -1,0 +1,51 @@
+{%- comment -%}
+  Custom Product Info Snippet
+  Accepts:
+      - title {String} Product title
+      - description {String} Product description
+      - price {Number} Product price
+      - compare_at_price {Number} Product compare at price
+      - options {Array} Product options (optional)
+      - specifications {Array} Product specifications
+
+  Usage:
+      {% render 'custom-product-info' %}
+{%- endcomment -%}
+
+{% liquid
+  assign current_product = product.selected_or_first_available_variant
+%}
+
+<div class="product-info">
+  {% if title != blank %}
+    <h1 class="product-info__title">{{ title }}</h1>
+  {% endif %}
+  {% if description != blank %}
+    <div class="product-info__description">
+      {{ description }}
+    </div>
+  {% endif %}
+  {% if price != blank %}
+    {% render 'custom-product-price', price: price, compare_at_price: compare_at_price %}
+  {% endif %}
+  {% if options != blank %}
+    {% render 'custom-product-variant-picker',
+      options: options,
+      selected_or_first_available_variant_options: current_product.options
+    %}
+  {% endif %}
+  <div class="add-to-cart-container">
+    {% if product.available %}
+      {% render 'custom-product-quantity', max_quantity: current_product.inventory_quantity %}
+    {% endif %}
+
+    <add-to-cart-button>
+      <script id="product-variants-json" type="application/json">
+        {
+          "productInfo": {{ product.variants | json }}
+        }
+      </script>
+    </add-to-cart-button>
+  </div>
+  {% render 'custom-product-specification', specifications: specifications %}
+</div>
