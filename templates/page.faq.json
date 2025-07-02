@@ -1,16 +1,81 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-    "name": "FAQ Page",
-    "sections": {
-      "faq": {
-        "type": "faq-accordion"
+  "sections": {
+    "split_section_8CrWrr": {
+      "type": "split-section",
+      "blocks": {
+        "text_block_NLzGxU": {
+          "type": "text_block",
+          "settings": {
+            "title": "Title",
+            "subtitle": "Subtitle",
+            "description": "Description",
+            "cta_text": "CTA Button",
+            "cta_link": "",
+            "cta_bg_color": "#000000",
+            "cta_text_color": "#ffffff"
+          }
+        },
+        "image_block_fYxDxD": {
+          "type": "image_block",
+          "settings": {
+            "image_alt": "",
+            "background_size_desktop": "cover",
+            "background_size_mobile": "cover"
+          }
+        }
       },
-      "split": {
-        "type": "split-section"
+      "block_order": [
+        "text_block_NLzGxU",
+        "image_block_fYxDxD"
+      ],
+      "name": "Split Section",
+      "settings": {
+        "text_block_width": 50,
+        "media_block_width": 50
       }
     },
-    "order": [
-      "faq",
-      "split"
-    ]
-  }
-  
+    "faq_section_YkdYa9": {
+      "type": "faq-section",
+      "blocks": {
+        "accordion_item_hyWetw": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "What is your return policy?",
+            "content": "You can return any item within 30 days of purchase.",
+            "is_open": false,
+            "icon_position": "left"
+          }
+        }
+      },
+      "block_order": [
+        "accordion_item_hyWetw"
+      ],
+      "name": "FAQ Section",
+      "settings": {
+        "title": "Title",
+        "description": "Description",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "faq_banner_V6aftg": {
+      "type": "faq-banner",
+      "name": "FAQ Banner",
+      "settings": {}
+    }
+  },
+  "order": [
+    "faq_banner_V6aftg",
+    "faq_section_YkdYa9",
+    "split_section_8CrWrr"
+  ]
+}

@@ -1,0 +1,41 @@
+{%- comment -%}
+  Custom Product Variant Picker Snippet
+
+  Accepts:
+    - options {Array} Array of product options
+    - selected_or_first_available_variant_options {Array} Array of selected or first available variant options
+
+  Usage:
+    {% render 'custom-product-variant-picker' %}
+{%- endcomment -%}
+
+{% if options.size > 0 %}
+  <div class="product-variants">
+    {% for option in options %}
+      {% if option != blank %}
+        <div class="product-variant">
+          <div class="product-variant__label">
+            {{ option.name }}
+          </div>
+          {% if option.values.size > 0 %}
+            {% for value in option.values %}
+              <div class="product-variant__option">
+                <input
+                  type="radio"
+                  id="option-{{ option.name | handleize }}-{{ value | handleize }}"
+                  name="option-{{ option.name | handleize }}"
+                  value="{{ value }}"
+                  class="product-variant__input"
+                  {% if selected_or_first_available_variant_options contains value %}
+                    checked
+                  {% endif %}
+                >
+                <label for="option-{{ option.name | handleize }}-{{ value | handleize }}">{{ value }}</label>
+              </div>
+            {% endfor %}
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}

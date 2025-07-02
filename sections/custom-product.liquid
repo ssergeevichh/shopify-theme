@@ -1,0 +1,66 @@
+{% liquid
+  assign specifications = product.metafields.custom.product_characteristics.value
+%}
+
+<div class="product-layout page-width">
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'product_slider' %}
+        {% render 'custom-product-slider', media: product.media %}
+      {% when 'product_info' %}
+        {% render 'custom-product-info',
+          title: product.title,
+          description: product.description,
+          price: product.price,
+          compare_at_price: product.compare_at_price,
+          options: product.options_with_values,
+          specifications: specifications
+        %}
+    {% endcase %}
+  {% endfor %}
+</div>
+
+{{ 'https://cdn.jsdelivr.net/npm/swiper@11.2.8/swiper-bundle.min.css' | stylesheet_tag }}
+<script defer src="https://cdn.jsdelivr.net/npm/swiper@11.2.8/swiper-bundle.min.js"></script>
+
+{{ 'custom-product.css' | asset_url | stylesheet_tag }}
+{{ 'accordion-component.css' | asset_url | stylesheet_tag }}
+
+<script defer src="{{ 'product-gallery.js' | asset_url }}"></script>
+<script defer src="{{ 'product-quantity.js' | asset_url }}"></script>
+<script defer src="{{ 'add-to-cart-button.js' | asset_url }}"></script>
+<script defer src="{{ 'accordion.js' | asset_url }}"></script>
+
+{% schema %}
+{
+  "name": "Custom Product",
+  "tag": "section",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "blocks": [
+    {
+      "type": "product_slider",
+      "name": "Product Slider"
+    },
+    {
+      "type": "product_info",
+      "name": "Product Info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Product Layout",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "product_slider"
+        },
+        {
+          "type": "product_info"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

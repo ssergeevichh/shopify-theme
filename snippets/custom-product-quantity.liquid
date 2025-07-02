@@ -1,0 +1,37 @@
+{%- comment -%}
+  Custom Product Quantity Snippet
+
+  Accepts:
+  	- max_quantity {Number} Maximum quantity available for the product
+
+  Usage:
+  	{% render 'custom-product-quantity' %}
+{%- endcomment -%}
+
+{% if max_quantity > 0 %}
+  <product-quantity class="product-quantity">
+    <button
+      type="button"
+      class="product-quantity__button"
+      quantity-decrease
+    >
+      -
+    </button>
+    <input
+      id="product-quantity-input"
+      type="number"
+      class="product-quantity__input"
+      value="1"
+      min="1"
+      max="{{ max_quantity }}"
+      quantity-input
+    >
+    <button
+      type="button"
+      class="product-quantity__button"
+      quantity-increase
+    >
+      +
+    </button>
+  </product-quantity>
+{% endif %}

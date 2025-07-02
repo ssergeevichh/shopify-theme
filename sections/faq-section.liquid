@@ -3,29 +3,52 @@
   assign description = section.settings.description
   assign padding_top = section.settings.padding_top | default: 20
   assign padding_bottom = section.settings.padding_bottom | default: 20
+
+  assign faq_items = page.metafields.custom.faq_items.value
 %}
 
-<div class="faq-content page-width" style="padding-top: {{ padding_top }}px; padding-bottom: {{ padding_bottom }}px;">
+{{ 'accordion-component.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'accordion.js' | asset_url }}" defer="defer"></script>
+
+<div
+  class="faq-content page-width"
+  style="padding-top: {{ padding_top }}px; padding-bottom: {{ padding_bottom }}px;"
+>
   <div class="faq-content__header">
     <h2 class="faq-content__title">{{ title }}</h2>
     <p class="faq-content__description">{{ description }}</p>
   </div>
 
-  <div class="faq-list">
+  <div class="accordion-list">
     {% for block in section.blocks %}
-      {% render 'faq-item',
+      {% render 'accordion-item',
         title: block.settings.title,
         content: block.settings.content,
         icon: block.settings.icon,
+        icon_position: block.settings.icon_position,
         is_open: block.settings.is_open
       %}
     {% endfor %}
   </div>
+
+  {% if faq_items != blank %}
+    <div class="accordion-list">
+      {% for faq in faq_items %}
+        {% render 'accordion-item',
+          title: faq.title,
+          content: faq.content,
+          icon: faq.icon,
+          icon_position: 'left',
+          is_open: false
+        %}
+      {% endfor %}
+    </div>
+  {% endif %}
 </div>
 
 {% schema %}
 {
-  "name": "FAQ Accordion",
+  "name": "FAQ Section",
   "settings": [
     {
       "type": "text",
@@ -54,8 +77,8 @@
   ],
   "blocks": [
     {
-      "type": "faq_item",
-      "name": "FAQ Item",
+      "type": "accordion_item",
+      "name": "Accordion Item",
       "settings": [
         {
           "type": "text",
@@ -79,17 +102,27 @@
           "id": "is_open",
           "label": "Open by default",
           "default": false
+        },
+        {
+          "type": "select",
+          "id": "icon_position",
+          "label": "Icon Position",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "left"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "FAQ Accordion",
+      "name": "FAQ Section",
       "category": "Custom",
       "blocks": [
         {
-          "type": "faq_item",
+          "type": "accordion_item",
           "settings": {
             "title": "What is your return policy?",
             "content": "You can return any item within 30 days of purchase.",
