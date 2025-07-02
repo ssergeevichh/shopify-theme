@@ -8,6 +8,8 @@
 %}
 
 {{ 'accordion-component.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'accordion-list.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'accordion.js' | asset_url }}" defer="defer"></script>
 
 <div
@@ -19,7 +21,7 @@
     <p class="faq-content__description">{{ description }}</p>
   </div>
 
-  <div class="accordion-list">
+  <accordion-list class="accordion-list">
     {% for block in section.blocks %}
       {% render 'accordion-item',
         title: block.settings.title,
@@ -29,10 +31,8 @@
         is_open: block.settings.is_open
       %}
     {% endfor %}
-  </div>
 
-  {% if faq_items != blank %}
-    <div class="accordion-list">
+    {% if faq_items != blank %}
       {% for faq in faq_items %}
         {% render 'accordion-item',
           title: faq.title,
@@ -42,8 +42,8 @@
           is_open: false
         %}
       {% endfor %}
-    </div>
-  {% endif %}
+    {% endif %}
+  </accordion-list>
 </div>
 
 {% schema %}

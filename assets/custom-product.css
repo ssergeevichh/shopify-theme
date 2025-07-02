@@ -51,15 +51,15 @@
 }
 
 .product-variant__option {
-    cursor: pointer;
     border: 1px solid #12121240;
-    padding: 10px;
     border-radius: 4px;
     line-height: 1
 }
 
 .product-variant__option label {
+    display: block;
     cursor: pointer;
+    padding: 10px;
 }
 
 .product-variant__option input {
