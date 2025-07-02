@@ -12,18 +12,18 @@
     "main": {
       "type": "custom-product",
       "blocks": {
-        "product_slider_QwLwq6": {
-          "type": "product_slider",
-          "settings": {}
-        },
         "product_info_UEDrrK": {
           "type": "product_info",
+          "settings": {}
+        },
+        "product_slider_QwLwq6": {
+          "type": "product_slider",
           "settings": {}
         }
       },
       "block_order": [
-        "product_slider_QwLwq6",
-        "product_info_UEDrrK"
+        "product_info_UEDrrK",
+        "product_slider_QwLwq6"
       ],
       "settings": {}
     },
