@@ -1,0 +1,56 @@
+{%- comment -%}
+   Mini Cart Item Snippet
+
+   Accepts:
+   - title {String} Product title
+  - variant_id {String} Product variant ID
+   - variant_title {String} Product variant title (if applicable)
+   - description {String} Product description
+   - price {Number} Product price
+   - quantity {Number} Product quantity
+   - max_quantity {Number} Maximum quantity available for the product
+   - image {String} Product image URL
+
+   Usage:
+     {% render 'mini-cart-item' %}
+{%- endcomment -%}
+
+{% liquid
+  if price != blank and quantity != blank
+    assign total_price = price | times: quantity
+  else
+    assign total_price = 0
+  endif
+%}
+
+<li class="mini-cart__item">
+  {% if image != blank %}
+    <div class="mini-cart__item-image">
+      <img src="{{ image | image_url }}" alt="{{ title }}" loading="lazy" width="100" height="100">
+    </div>
+  {% endif %}
+  <div class="mini-cart__item-details">
+    {% if title != blank %}
+      <h3 class="mini-cart__item-title">{{ title }}</h3>
+    {% endif %}
+    {% if description != blank %}
+      <p class="mini-cart__item-description">{{ description | truncate: 100 | strip_html }}</p>
+    {% endif %}
+    {% if price != blank %}
+      <p class="mini-cart__item-price">{{ price | money }}</p>
+    {% endif %}
+    {% if variant_title != blank %}
+      <p class="mini-cart__item-variant">Параметр: {{ variant_title }}</p>
+    {% endif %}
+    {% if quantity != blank %}
+      {% render 'mini-quantity-controls',
+        max_quantity: max_quantity,
+        current_quantity: quantity,
+        variant_id: variant_id
+      %}
+    {% endif %}
+  </div>
+  <div class="mini-cart__item-total">
+    {{ total_price | money }}
+  </div>
+</li>

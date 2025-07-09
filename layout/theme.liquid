@@ -257,6 +257,7 @@
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
+    {{ 'mini-cart.css' | asset_url | stylesheet_tag }}
 
     {%- if settings.cart_type == 'drawer' -%}
       {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
@@ -372,5 +373,9 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
+    <mini-cart class="mini-cart"></mini-cart>
+    <script src="{{ 'mini-cart.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'mini-quantity-controls.js' | asset_url }}" defer="defer"></script>
   </body>
 </html>

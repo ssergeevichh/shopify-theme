@@ -150,6 +150,10 @@
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
     width: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .add-to-cart-button:hover {

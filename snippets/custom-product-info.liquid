@@ -1,51 +1,46 @@
 {%- comment -%}
   Custom Product Info Snippet
   Accepts:
-      - title {String} Product title
-      - description {String} Product description
-      - price {Number} Product price
-      - compare_at_price {Number} Product compare at price
-      - options {Array} Product options (optional)
-      - specifications {Array} Product specifications
+    - product {Object} Product object containing details like title, description, price, options, etc.
 
   Usage:
-      {% render 'custom-product-info' %}
+    {% render 'custom-product-info' %}
 {%- endcomment -%}
 
-{% liquid
-  assign current_product = product.selected_or_first_available_variant
-%}
-
 <div class="product-info">
-  {% if title != blank %}
-    <h1 class="product-info__title">{{ title }}</h1>
+  {% if product.title != blank %}
+    <h1 class="product-info__title">{{ product.title }}</h1>
   {% endif %}
-  {% if description != blank %}
+  {% if product.description != blank %}
     <div class="product-info__description">
-      {{ description }}
+      {{ product.description }}
     </div>
   {% endif %}
-  {% if price != blank %}
-    {% render 'custom-product-price', price: price, compare_at_price: compare_at_price %}
+  {% if product.price != blank %}
+    {% render 'custom-product-price', price: product.price, compare_at_price: product.compare_at_price %}
   {% endif %}
-  {% if options != blank %}
+  {% if product.options != blank %}
     {% render 'custom-product-variant-picker',
-      options: options,
-      selected_or_first_available_variant_options: current_product.options
+      options: product.options_with_values,
+      selected_or_first_available_variant_options: product.selected_or_first_available_variant.options
     %}
   {% endif %}
   <div class="add-to-cart-container">
     {% if product.available %}
-      {% render 'custom-product-quantity', max_quantity: current_product.inventory_quantity %}
+      {% render 'custom-product-quantity',
+        max_quantity: product.selected_or_first_available_variant.inventory_quantity
+      %}
     {% endif %}
 
-    <add-to-cart-button>
+    <add-to-cart-button type="button" class="add-to-cart-button">
       <script id="product-variants-json" type="application/json">
         {
           "productInfo": {{ product.variants | json }}
         }
       </script>
+      <span add-button-text>Додати в кошик</span>
+      <span class="loader"></span>
     </add-to-cart-button>
   </div>
-  {% render 'custom-product-specification', specifications: specifications %}
+  {% render 'custom-product-specification', specifications: product.metafields.custom.product_characteristics.value %}
 </div>

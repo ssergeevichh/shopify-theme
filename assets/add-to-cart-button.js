@@ -1,6 +1,7 @@
 class AddToCartButton extends HTMLElement {
     constructor() {
         super();
+        this.miniCart = document.querySelector('mini-cart');
         this.quantityInput = document.getElementById('product-quantity-input');
 
         this.variantsScript = this.querySelector('#product-variants-json');
@@ -10,20 +11,9 @@ class AddToCartButton extends HTMLElement {
     }
     
     connectedCallback() {
-        this.addButton();
         this.getVariantOptions();
-    }
 
-    addButton () {
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'add-to-cart-button';
-        button.textContent = 'Додати в кошик';
-    
-        this.appendChild(button);
-        this.button = button;
-    
-        button.addEventListener('click', this.addToCart);
+        this.addEventListener('click', this.addToCart);
     }
 
     getVariantOptions() {
@@ -44,10 +34,27 @@ class AddToCartButton extends HTMLElement {
     
         return matchingVariant ? matchingVariant.id : null;
     }
+
+    setLoadingState(loading) {
+        const button = this;
+        const buttonText = button.querySelector('[add-button-text]');
+
+        if (loading) {
+            button.classList.add('loading');
+            buttonText.textContent = 'Додається до кошика';
+            this.disabled = true;
+        } else {
+            button.classList.remove('loading');
+            buttonText.textContent = 'Додати в кошик';
+            this.disabled = false;
+        }
+    }
   
     addToCart() {
         const variantId = this.getMatchingVariantId();
         const quantity = parseInt(this.quantityInput?.value || '1', 10);
+
+        this.setLoadingState(true);
   
         fetch('/cart/add.js', {
             method: 'POST',
@@ -65,9 +72,11 @@ class AddToCartButton extends HTMLElement {
             return res.json();
         })
         .then(() => {
-            alert('Товар додано до кошика');
+            this.setLoadingState(false);
+            this.miniCart.refreshMiniCart({ open: true, updateBadge: true })
         })
         .catch(() => {
+            this.setLoadingState(false);
             alert('Помилка при додаванні');
         });
     }
