@@ -245,6 +245,11 @@
     cursor: pointer;
 }
 
+.remove-button svg {
+    width: 20px;
+    height: 20px;
+}
+
 .mini-cart-toggle {
     position: relative;
     background: transparent;
